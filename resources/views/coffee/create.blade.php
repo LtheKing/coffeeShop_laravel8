@@ -28,15 +28,15 @@
 @endsection
 
 <script>
-    function loadFile(){
-        var fullPath = document.getElementById('input_file').value;
-        if (fullPath) {
-            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-            var filename = fullPath.substring(startIndex);
-            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                filename = filename.substring(1);
-            }
-            document.getElementById('input_file_label').innerHTML = filename
-        }
+        function loadFile(){
+            var fullPath = document.getElementById('input_file').value;
+                if (fullPath) {
+                    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                    var filename = fullPath.substring(startIndex);
+                    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                        filename = filename.substring(1);
+                    }
+                    document.getElementById('input_file_label').innerHTML = filename
+                }
     };
 </script>
