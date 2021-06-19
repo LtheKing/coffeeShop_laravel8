@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  background-color: white;
+}
+
+.nav-item:hover {
+  background-color: #aae1f2;
+}
+
+#menu_container {
+  margin: 10 10;
+}
+/*# sourceMappingURL=home.css.map */
