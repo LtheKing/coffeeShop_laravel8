@@ -18,6 +18,8 @@ class CFCoffee extends Migration
             $table->string('Name');
             $table->string('Description');
             $table->string('FileName');
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
         });
     }
 

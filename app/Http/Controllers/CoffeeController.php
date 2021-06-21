@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Coffee;
+use Illuminate\Support\Facades\Storage;
 
 class CoffeeController extends Controller
 {
@@ -34,7 +36,31 @@ class CoffeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $coffee = new Coffee;
+
+        $coffee->Name = $request->Name;
+        $coffee->FileName = $request->FileName;
+        $coffee->Description = $request->Description;
+
+        // dd($coffee);
+        // Storage::disk('local')->put($coffee->FileName, 'Contents');
+
+        if ($request->hasFile('FileName')) {
+            $image      = $request->file('FileName');
+            $fileName   = time() . '.' . $image->getClientOriginalExtension();
+
+            $img = Image::make($image->getRealPath());
+            $img->resize(120, 120, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img->stream(); // <-- Key point
+
+            dd($img);
+            Storage::disk('local')->put($img, 'Contents');
+        }
+        $coffee->save();
+        return redirect('/');
     }
 
     /**
