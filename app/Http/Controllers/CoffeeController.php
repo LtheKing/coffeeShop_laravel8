@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Coffee;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class CoffeeController extends Controller
 {
@@ -55,9 +56,7 @@ class CoffeeController extends Controller
             });
 
             $img->stream(); // <-- Key point
-
-            dd($img);
-            Storage::disk('local')->put($img, 'Contents');
+            Storage::disk('local')->put('images/1/smalls'.'/'.$fileName, $img, 'Contents');
         }
         $coffee->save();
         return redirect('/');

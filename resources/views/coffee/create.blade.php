@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<form method="POST" action="{{ route('coffee.store') }}">
+<form method="POST" action="{{ route('coffee.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <label for="">Nama Kopi</label>
