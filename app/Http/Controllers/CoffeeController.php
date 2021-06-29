@@ -16,7 +16,9 @@ class CoffeeController extends Controller
      */
     public function index()
     {
-        //
+        $coffee = Coffee::all();
+        dd($coffee);
+        return view('home.content', $coffee);
     }
 
     /**
@@ -40,24 +42,22 @@ class CoffeeController extends Controller
         $coffee = new Coffee;
 
         $coffee->Name = $request->Name;
-        $coffee->FileName = $request->FileName;
         $coffee->Description = $request->Description;
-
-        // dd($coffee);
-        // Storage::disk('local')->put($coffee->FileName, 'Contents');
 
         if ($request->hasFile('FileName')) {
             $image      = $request->file('FileName');
             $fileName   = time() . '.' . $image->getClientOriginalExtension();
 
             $img = Image::make($image->getRealPath());
-            $img->resize(120, 120, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            // $img->resize(120, 120, function ($constraint) {
+            //     $constraint->aspectRatio();
+            // });
 
             $img->stream(); // <-- Key point
-            Storage::disk('local')->put('images/1/smalls'.'/'.$fileName, $img, 'Contents');
+            Storage::disk('local')->put('images/'.$fileName, $img, 'public');
+            $coffee->FileName = $fileName;
         }
+
         $coffee->save();
         return redirect('/');
     }

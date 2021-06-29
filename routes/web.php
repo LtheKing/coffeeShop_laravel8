@@ -18,6 +18,6 @@ Route::get('/', function () {
 });
 
 Route::view('/about', 'about');
-Route::view('/', 'home.content');
+Route::get('/', 'CoffeeController@index');
 Route::view('/coffee/create', 'coffee.create');
 Route::post('/coffee/store', 'CoffeeController@store')->name('coffee.store');
